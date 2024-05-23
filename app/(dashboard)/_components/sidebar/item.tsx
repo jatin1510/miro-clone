@@ -29,7 +29,7 @@ export const Item = ({ id, name, imageUrl }: ItemProps) => {
                     onClick={onClick}
                     alt={name}
                     className={cn(
-                        "rounded-md cursor-pointer opacity-75 hover:opacity-100 transition",
+                        "rounded-md cursor-pointer opacity-60 hover:opacity-100 transition",
                         isActive && "opacity-100"
                     )}
                 />
