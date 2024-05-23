@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.2.0",
+    "@clerk/nextjs": "^4.29.5",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "convex": "^1.12.0",
     "lucide-react": "^0.379.0",
     "next": "14.2.3",
     "react": "^18",
