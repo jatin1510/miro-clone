@@ -36,6 +36,12 @@ export const ConfirmModal = ({
         setBoardName(e.target.value);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && boardName === title) {
+            onConfirm();
+        }
+    };
+
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
@@ -46,7 +52,11 @@ export const ConfirmModal = ({
                         {description}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
-                <Input onChange={handleChange} />
+                {/* TODO: Automatically focus the input tag */}
+                <Input
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                />
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction
