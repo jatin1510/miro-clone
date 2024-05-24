@@ -5,6 +5,7 @@ import { api } from "@/convex/_generated/api";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { useOrganization } from "@clerk/nextjs";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export const EmptyBoards = () => {
     const { organization } = useOrganization();
@@ -15,7 +16,15 @@ export const EmptyBoards = () => {
             return;
         }
         try {
-            await mutate({ orgId: organization.id, title: "Untitled" });
+            await mutate({ orgId: organization.id, title: "Untitled" })
+                .then((id) => {
+                    toast.success("Board created");
+                    // TODO: redirect to board/{id}
+                })
+                .catch((error) => {
+                    toast.error("Failed to create board");
+                    console.error(error);
+                });
         } catch (error) {
             console.error(error);
         }
