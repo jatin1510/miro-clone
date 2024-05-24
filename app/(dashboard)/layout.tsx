@@ -13,6 +13,8 @@ const DashBoardLayout = ({ children }: DashBoardLayoutProps) => {
             <div className="pl-[60px] h-full">
                 <div className="flex h-full">
                     <OrgSidebar />
+                    {/* Separator */}
+                    <div className="border-l border-gray-300 h-full" /> 
                     <div className="h-full flex-1">
                         <Navbar />
                         {children}
