@@ -73,7 +73,7 @@ export const OrgSidebar = () => {
                         href={{
                             pathname: "/",
                             query: {
-                                favorite: "true",
+                                favorites: "true",
                             },
                         }}
                     >
