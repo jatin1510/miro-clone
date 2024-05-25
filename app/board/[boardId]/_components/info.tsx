@@ -59,7 +59,7 @@ const Info = ({ boardId }: InfoProps) => {
             <Hint label="Edit title" side="bottom" sideOffset={10}>
                 <Button
                     variant="board"
-                    className="text-base font-normal px-2"
+                    className="text-base font-normal px-2 italic"
                     onClick={() => onOpen(data._id, data.title)}
                 >
                     {data.title}
