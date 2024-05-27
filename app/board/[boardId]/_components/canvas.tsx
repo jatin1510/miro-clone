@@ -3,7 +3,7 @@
 import Info from "./info";
 import Participants from "./participants";
 import Toolbar from "./toolbar";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import {
     CanvasState,
@@ -387,6 +387,29 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         }
         return layerIdsToColorSelection;
     }, [selections]);
+
+    useEffect(() => {
+        function onKeyDown(e: KeyboardEvent) {
+            switch (e.key) {
+                case "z": {
+                    if (e.ctrlKey || e.metaKey) {
+                        if (e.shiftKey) {
+                            history.redo();
+                        } else {
+                            history.undo();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [history]);
 
     return (
         <main className="h-full w-full relative bg-neutral-100 touch-none">
