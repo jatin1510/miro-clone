@@ -16,6 +16,22 @@ export const SearchInput = () => {
     };
 
     useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "f" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                const input = document.querySelector("input");
+                input?.focus();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+    useEffect(() => {
         const url = qs.stringifyUrl(
             {
                 url: "/",
