@@ -9,6 +9,7 @@ import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { Button } from "@/components/ui/button";
 import { Hint } from "@/components/hint";
 import { BringToFront, Copy, SendToBack, Trash2 } from "lucide-react";
+import { BringToFrontIcon, SendToBackIcon } from "@/components/icon";
 
 interface SelectionToolsProps {
     camera: Camera;
@@ -104,7 +105,11 @@ export const SelectionTools = memo(
                             variant="board"
                             size="icon"
                         >
-                            <BringToFront />
+                            <BringToFrontIcon
+                                color="black"
+                                height={30}
+                                width={30}
+                            />
                         </Button>
                     </Hint>
                     <Hint label="Send to back" side="bottom">
@@ -113,7 +118,11 @@ export const SelectionTools = memo(
                             variant="board"
                             size="icon"
                         >
-                            <SendToBack />
+                            <SendToBackIcon
+                                color="black"
+                                height={30}
+                                width={30}
+                            />
                         </Button>
                     </Hint>
                 </div>
