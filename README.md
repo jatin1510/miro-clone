@@ -41,7 +41,7 @@ Make sure you have the following installed on your system:
 
 3. **Configure environment variables:**
 
-    Create a `.env.local` file in the root directory and add your configuration variables. You can explore the .env.example file for more information.
+    Create a `.env.local` file in the root directory and add your configuration variables. You can explore the `.env.example` file for more information.
 
 4. **Clerk Setup**
    - Enable Organization from the "Organization settings"
