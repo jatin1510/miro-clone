@@ -397,6 +397,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         const newLayerIds: string[] = [];
         const layersIdsToCopy = self.presence.selection;
 
+        if (liveLayerIds.length + layersIdsToCopy.length > MAX_LAYERS) {
+            return;
+        }
+
+        if (layersIdsToCopy.length === 0) {
+            return;
+        }
+
         layersIdsToCopy.forEach((layerId) => {
             const newLayerId = nanoid();
             const layer = liveLayers.get(layerId);
@@ -459,6 +467,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                 redo={history.redo}
             />
             <SelectionTools
+                onDuplicate={duplicateLayers}
                 camera={camera}
                 setLastUsedColor={setLastUsedColor}
             />

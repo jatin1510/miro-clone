@@ -8,15 +8,16 @@ import { ColorPicker } from "./color-picker";
 import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { Button } from "@/components/ui/button";
 import { Hint } from "@/components/hint";
-import { BringToFront, SendToBack, Trash2 } from "lucide-react";
+import { BringToFront, Copy, SendToBack, Trash2 } from "lucide-react";
 
 interface SelectionToolsProps {
     camera: Camera;
     setLastUsedColor: (color: Color) => void;
+    onDuplicate: () => void;
 }
 
 export const SelectionTools = memo(
-    ({ camera, setLastUsedColor }: SelectionToolsProps) => {
+    ({ camera, setLastUsedColor, onDuplicate }: SelectionToolsProps) => {
         const selection = useSelf((me) => me.presence.selection);
 
         const moveToFront = useMutation(
@@ -97,24 +98,38 @@ export const SelectionTools = memo(
             >
                 <ColorPicker onChange={setFill} />
                 <div className="flex flex-col gap-y-0.5">
-                    <Hint label="Bring to front">
-                        <Button
-                            onClick={moveToFront}
-                            variant="board"
-                            size="icon"
-                        >
-                            <BringToFront />
-                        </Button>
-                    </Hint>
-                    <Hint label="Send to back" side="bottom">
-                        <Button
-                            onClick={moveToBack}
-                            variant="board"
-                            size="icon"
-                        >
-                            <SendToBack />
-                        </Button>
-                    </Hint>
+                    <div className="flex items-center justify-center">
+                        <Hint label="Duplicate (ctrl + D)">
+                            <Button
+                                onClick={onDuplicate}
+                                variant="board"
+                                size="icon"
+                            >
+                                <Copy />
+                            </Button>
+                        </Hint>
+                    </div>
+                    <div className="border-b" />
+                    <div className="flex items-center justify-center">
+                        <Hint label="Bring to front" side="bottom">
+                            <Button
+                                onClick={moveToFront}
+                                variant="board"
+                                size="icon"
+                            >
+                                <BringToFront />
+                            </Button>
+                        </Hint>
+                        <Hint label="Send to back" side="bottom">
+                            <Button
+                                onClick={moveToBack}
+                                variant="board"
+                                size="icon"
+                            >
+                                <SendToBack />
+                            </Button>
+                        </Hint>
+                    </div>
                 </div>
                 <div className="flex items-center pl-2 ml-2 border-l border-neutral-200">
                     <Hint label="Delete">
