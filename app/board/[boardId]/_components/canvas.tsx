@@ -43,6 +43,7 @@ import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
 
 const MAX_LAYERS = 100;
 const SELECTION_NET_THRESHOLD = 5;
+const MOVE_OFFSET = 5;
 
 interface CanvasProps {
     boardId: string;
@@ -425,8 +426,33 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         setCanvasState({ mode: CanvasMode.None });
     }, []);
 
+    const moveSelectedLayers = useMutation(
+        ({ storage, self, setMyPresence }, offset: Point) => {
+            const liveLayers = storage.get("layers");
+            const selection = self.presence.selection;
+
+            if (selection.length === 0) {
+                return;
+            }
+
+            for (const id of selection) {
+                const layer = liveLayers.get(id);
+                if (layer) {
+                    layer.update({
+                        x: layer.get("x") + offset.x,
+                        y: layer.get("y") + offset.y,
+                    });
+                }
+            }
+
+            setMyPresence({ selection }, { addToHistory: true });
+        },
+        [canvasState, history]
+    );
+
     useEffect(() => {
         function onKeyDown(e: KeyboardEvent) {
+            let offset: Point = { x: 0, y: 0 };
             switch (e.key) {
                 case "d": {
                     if (e.ctrlKey && canvasState.mode === CanvasMode.None) {
@@ -444,6 +470,24 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                         break;
                     }
                 }
+                case "ArrowUp":
+                    offset = { x: 0, y: -MOVE_OFFSET };
+                    moveSelectedLayers(offset);
+                    break;
+                case "ArrowDown":
+                    offset = { x: 0, y: MOVE_OFFSET };
+                    moveSelectedLayers(offset);
+                    break;
+                case "ArrowLeft":
+                    offset = { x: -MOVE_OFFSET, y: 0 };
+                    moveSelectedLayers(offset);
+                    break;
+                case "ArrowRight":
+                    offset = { x: MOVE_OFFSET, y: 0 };
+                    moveSelectedLayers(offset);
+                    break;
+                default:
+                    break;
             }
         }
 
