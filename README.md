@@ -2,10 +2,10 @@
 
 This project is a clone of the popular Miro whiteboard application, built using modern web technologies and tools. Follow the tutorial by [Code with Antonio](https://www.youtube.com/@codewithantonio) to create your own collaborative whiteboard app.
 
-<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/a2445f5e-ba1e-4a4c-b8f1-8f7914a72c3c">
-<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/83bc3ff8-5f5c-4422-aaf6-2f555dc00a5c">
-
-
+|<img width="1439" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/02756b9e-7a33-4bf6-933e-d4119d16153d">|
+|-|
+|<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/a2445f5e-ba1e-4a4c-b8f1-8f7914a72c3c">|
+|<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/83bc3ff8-5f5c-4422-aaf6-2f555dc00a5c">|
 
 ## Tech Stack
 
