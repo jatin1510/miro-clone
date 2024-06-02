@@ -22,7 +22,7 @@ Follow these instructions to set up the project locally.
 Make sure you have the following installed on your system:
 
 - Node.js (>= 14.x)
-- npm or yarn
+- npm
 
 ### Installation
 
