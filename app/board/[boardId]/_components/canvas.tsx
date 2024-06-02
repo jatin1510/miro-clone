@@ -14,6 +14,7 @@ import {
     Point,
     Side,
     XYWH,
+    Layer,
 } from "@/types/canvas";
 import {
     useHistory,
@@ -55,6 +56,8 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     const [canvasState, setCanvasState] = useState<CanvasState>({
         mode: CanvasMode.None,
     });
+
+    const [copiedLayers, setCopiedLayers] = useState<string[]>([]);
 
     const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
     const [lastUsedColor, setLastUsedColor] = useState<Color>({
@@ -388,9 +391,41 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         return layerIdsToColorSelection;
     }, [selections]);
 
+    const duplicateLayers = useMutation(({ storage, self, setMyPresence }) => {
+        const liveLayers = storage.get("layers");
+        const liveLayerIds = storage.get("layerIds");
+        const newLayerIds: string[] = [];
+        const layersIdsToCopy = self.presence.selection;
+
+        layersIdsToCopy.forEach((layerId) => {
+            const newLayerId = nanoid();
+            const layer = liveLayers.get(layerId);
+
+            if (layer) {
+                const newLayer = layer.clone();
+                newLayer.set("x", newLayer.get("x") + 10);
+                newLayer.set("y", newLayer.get("y") + 10);
+
+                liveLayerIds.push(newLayerId);
+                liveLayers.set(newLayerId, newLayer);
+
+                newLayerIds.push(newLayerId);
+            }
+        });
+
+        setMyPresence({ selection: [...newLayerIds] }, { addToHistory: true });
+        setCanvasState({ mode: CanvasMode.None });
+    }, []);
+
     useEffect(() => {
         function onKeyDown(e: KeyboardEvent) {
             switch (e.key) {
+                case "d": {
+                    if (e.ctrlKey && canvasState.mode === CanvasMode.None) {
+                        duplicateLayers();
+                    }
+                    break;
+                }
                 case "z": {
                     if (e.ctrlKey || e.metaKey) {
                         if (e.shiftKey) {
