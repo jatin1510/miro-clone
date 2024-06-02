@@ -52,6 +52,7 @@ Make sure you have the following installed on your system:
    - Enable Organization from the "Organization settings"
    - Add JWT Template named "convex" <img width="792" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/43e12f31-aa7c-4a51-b8f9-ffef2846f621">
    - Make sure to have `org_id` and `org_role` inside **Claims** <img width="628" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/1536a650-4898-46e0-8e7c-3c2dc229688a">
+   - Don't forget to add issuer into the `auth.config.js` inside /convex.
 
 5. **Prepare the convex functions:**
     ```sh
