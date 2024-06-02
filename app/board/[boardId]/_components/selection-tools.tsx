@@ -98,43 +98,38 @@ export const SelectionTools = memo(
             >
                 <ColorPicker onChange={setFill} />
                 <div className="flex flex-col gap-y-0.5">
-                    <div className="flex items-center justify-center">
-                        <Hint label="Duplicate (ctrl + D)">
-                            <Button
-                                onClick={onDuplicate}
-                                variant="board"
-                                size="icon"
-                            >
-                                <Copy />
-                            </Button>
-                        </Hint>
-                    </div>
-                    <div className="border-b" />
-                    <div className="flex items-center justify-center">
-                        <Hint label="Bring to front" side="bottom">
-                            <Button
-                                onClick={moveToFront}
-                                variant="board"
-                                size="icon"
-                            >
-                                <BringToFront />
-                            </Button>
-                        </Hint>
-                        <Hint label="Send to back" side="bottom">
-                            <Button
-                                onClick={moveToBack}
-                                variant="board"
-                                size="icon"
-                            >
-                                <SendToBack />
-                            </Button>
-                        </Hint>
-                    </div>
-                </div>
-                <div className="flex items-center pl-2 ml-2 border-l border-neutral-200">
-                    <Hint label="Delete">
+                    <Hint label="Bring to front">
                         <Button
+                            onClick={moveToFront}
                             variant="board"
+                            size="icon"
+                        >
+                            <BringToFront />
+                        </Button>
+                    </Hint>
+                    <Hint label="Send to back" side="bottom">
+                        <Button
+                            onClick={moveToBack}
+                            variant="board"
+                            size="icon"
+                        >
+                            <SendToBack />
+                        </Button>
+                    </Hint>
+                </div>
+                <div className="flex flex-col items-center pl-2 ml-2 border-l border-neutral-200">
+                    <Hint label="Duplicate (ctrl + D)">
+                        <Button
+                            onClick={onDuplicate}
+                            variant="board"
+                            size="icon"
+                        >
+                            <Copy />
+                        </Button>
+                    </Hint>
+                    <Hint label="Delete" side="bottom">
+                        <Button
+                            variant="boardDestructive"
                             size="icon"
                             onClick={deleteLayers}
                         >
