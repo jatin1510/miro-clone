@@ -80,10 +80,12 @@ Make sure you have the following installed on your system:
   - **Move Selected Layers**: Use keyboard shortcuts to move selected layers within the Canvas component.
   - **Duplicate Layers**: Duplicate selected layers with `Ctrl + D`.
   - **Focus Search Input**: Keyboard shortcut to focus on the search input field.
+  
 
 - **Enhanced Selection Tool**:
   - **Improved Layout and Functionality**: Added a duplicate icon in the selection box for better usability.
   - **Select Fully Inside Rectangle**: Layers are only selected if they are fully inside the selection rectangle.
+  - **Shortcuts for Layer Insertion**: Added keyboard shortcuts for selection and insertion in toolbar
 
 - **Bug Fixes**:
   - **Search and Favorite Functionality**: Fixed the search and favorite functionality by using `useSearchParams`.

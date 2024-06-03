@@ -11,6 +11,8 @@ import {
     Undo2,
 } from "lucide-react";
 import { CanvasMode, CanvasState, LayerType } from "@/types/canvas";
+import { useEffect } from "react";
+import { useSelf } from "@/liveblocks.config";
 
 interface ToolbarProps {
     canvasState: CanvasState;
@@ -29,11 +31,68 @@ const Toolbar = ({
     canUndo,
     canRedo,
 }: ToolbarProps) => {
+    const selection = useSelf((me) => me.presence.selection);
+
+    useEffect(() => {
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (selection?.length > 0) return;
+
+            switch (e.key) {
+                case "a":
+                    setCanvasState({ mode: CanvasMode.None });
+                    break;
+
+                case "t":
+                    setCanvasState({
+                        layerType: LayerType.Text,
+                        mode: CanvasMode.Inserting,
+                    });
+                    break;
+
+                case "s":
+                    setCanvasState({
+                        mode: CanvasMode.Inserting,
+                        layerType: LayerType.Note,
+                    });
+                    break;
+
+                case "r":
+                    setCanvasState({
+                        mode: CanvasMode.Inserting,
+                        layerType: LayerType.Rectangle,
+                    });
+                    break;
+
+                case "e":
+                    setCanvasState({
+                        mode: CanvasMode.Inserting,
+                        layerType: LayerType.Ellipse,
+                    });
+                    break;
+
+                case "p":
+                    setCanvasState({
+                        mode: CanvasMode.Pencil,
+                    });
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [selection, setCanvasState]);
+    
     return (
         <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
             <div className="bg-white rounded-md p-1.5 flex gap-1 flex-col items-center shadow-md">
                 <ToolButton
-                    label="Select"
+                    label="Select (A)"
                     icon={MousePointer2}
                     onClick={() => setCanvasState({ mode: CanvasMode.None })}
                     isActive={
@@ -45,7 +104,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Text"
+                    label="Text (T)"
                     icon={TypeIcon}
                     onClick={() =>
                         setCanvasState({
@@ -59,7 +118,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Sticky Notes"
+                    label="Sticky Notes (S)"
                     icon={StickyNote}
                     onClick={() =>
                         setCanvasState({
@@ -73,7 +132,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Rectangle"
+                    label="Rectangle (R)"
                     icon={Square}
                     onClick={() =>
                         setCanvasState({
@@ -87,7 +146,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Ellipse"
+                    label="Ellipse (E)"
                     icon={Circle}
                     onClick={() =>
                         setCanvasState({
@@ -101,7 +160,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Pen"
+                    label="Pen (P)"
                     icon={Pencil}
                     onClick={() =>
                         setCanvasState({
@@ -113,13 +172,13 @@ const Toolbar = ({
             </div>
             <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">
                 <ToolButton
-                    label="Undo"
+                    label="Undo (Ctrl+Z)"
                     icon={Undo2}
                     onClick={undo}
                     isDisabled={!canUndo}
                 />
                 <ToolButton
-                    label="Redo"
+                    label="Redo (Ctrl+Shift+Z)"
                     icon={Redo2}
                     onClick={redo}
                     isDisabled={!canRedo}
