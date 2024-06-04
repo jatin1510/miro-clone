@@ -40,6 +40,7 @@ import { SelectionBox } from "./selection-box";
 import { SelectionTools } from "./selection-tools";
 import { Path } from "./path";
 import { useDisableScrollBounce } from "@/hooks/use-disable-scroll-bounce";
+import { ResetCamera } from "./reset-camera";
 
 const MAX_LAYERS = 100;
 const SELECTION_NET_THRESHOLD = 5;
@@ -58,9 +59,12 @@ export const Canvas = ({ boardId }: CanvasProps) => {
         mode: CanvasMode.None,
     });
 
-    const [copiedLayers, setCopiedLayers] = useState<string[]>([]);
-
     const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
+
+    const resetCamera = useCallback(() => {
+        setCamera({ x: 0, y: 0 });
+    }, []);
+
     const [lastUsedColor, setLastUsedColor] = useState<Color>({
         r: 255,
         g: 255,
@@ -510,6 +514,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                 undo={history.undo}
                 redo={history.redo}
             />
+            {camera.x != 0 && camera.y != 0 && <ResetCamera resetCamera={resetCamera} />}
             <SelectionTools
                 onDuplicate={duplicateLayers}
                 camera={camera}
