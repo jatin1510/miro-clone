@@ -4,8 +4,8 @@ This project is a clone of the popular Miro whiteboard application, built using 
 
 |<img width="1439" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/02756b9e-7a33-4bf6-933e-d4119d16153d">|
 |-|
-|<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/a2445f5e-ba1e-4a4c-b8f1-8f7914a72c3c">|
-|<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/83bc3ff8-5f5c-4422-aaf6-2f555dc00a5c">|
+|<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/3c038d07-457e-44da-8019-15330ca4ecc8">|
+|<img width="1440" alt="image" src="https://github.com/jatin1510/miro-clone/assets/72184476/8df60147-bb35-4a2b-aaa7-73161cd9d1b5">|
 
 ## Tech Stack
 
@@ -85,7 +85,16 @@ Make sure you have the following installed on your system:
 - **Enhanced Selection Tool**:
   - **Improved Layout and Functionality**: Added a duplicate icon in the selection box for better usability.
   - **Select Fully Inside Rectangle**: Layers are only selected if they are fully inside the selection rectangle.
-  - **Shortcuts for Layer Insertion**: Added keyboard shortcuts for selection and insertion in toolbar
+  - **Shortcuts for Layer Insertion**: Added keyboard shortcuts for selection and insertion in the toolbar
+
+- **Board Creation Limit**:
+  - User can make only 5 boards within an organization
+
+- **Reset Camera**:
+  - When the user scrolls through the canvas, a button at the right bottom appears through which the user can reset the camera position
+
+- **Color Picker**:
+  - User now has infinite possible combinations of the layer they want. Color picker also has the debouncing technique to prevent the numerous undo/redo actions
 
 - **Bug Fixes**:
   - **Search and Favorite Functionality**: Fixed the search and favorite functionality by using `useSearchParams`.
