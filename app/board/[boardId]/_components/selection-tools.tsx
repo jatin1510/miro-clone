@@ -15,10 +15,11 @@ interface SelectionToolsProps {
     camera: Camera;
     setLastUsedColor: (color: Color) => void;
     onDuplicate: () => void;
+    lastUsedColor: Color;
 }
 
 export const SelectionTools = memo(
-    ({ camera, setLastUsedColor, onDuplicate }: SelectionToolsProps) => {
+    ({ camera, setLastUsedColor, onDuplicate, lastUsedColor }: SelectionToolsProps) => {
         const selection = useSelf((me) => me.presence.selection);
 
         const moveToFront = useMutation(
@@ -97,7 +98,7 @@ export const SelectionTools = memo(
                 )`,
                 }}
             >
-                <ColorPicker onChange={setFill} />
+                <ColorPicker onChange={setFill} lastUsedColor={lastUsedColor} />
                 <div className="flex flex-col gap-y-0.5">
                     <Hint label="Bring to front">
                         <Button

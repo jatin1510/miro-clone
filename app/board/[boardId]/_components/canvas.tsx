@@ -519,6 +519,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
                 onDuplicate={duplicateLayers}
                 camera={camera}
                 setLastUsedColor={setLastUsedColor}
+                lastUsedColor={lastUsedColor}
             />
             <svg
                 className="h-[100vh] w-[100vw]"
