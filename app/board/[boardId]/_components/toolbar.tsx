@@ -36,44 +36,41 @@ const Toolbar = ({
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
             if (selection?.length > 0) return;
-
             switch (e.key) {
                 case "a":
-                    setCanvasState({ mode: CanvasMode.None });
+                    if (e.ctrlKey) setCanvasState({ mode: CanvasMode.None });
                     break;
 
                 case "t":
-                    setCanvasState({
-                        layerType: LayerType.Text,
-                        mode: CanvasMode.Inserting,
-                    });
+                    if (e.ctrlKey)
+                        setCanvasState({
+                            layerType: LayerType.Text,
+                            mode: CanvasMode.Inserting,
+                        });
                     break;
 
-                case "s":
-                    setCanvasState({
-                        mode: CanvasMode.Inserting,
-                        layerType: LayerType.Note,
-                    });
+                case "n":
+                    if (e.ctrlKey)
+                        setCanvasState({
+                            mode: CanvasMode.Inserting,
+                            layerType: LayerType.Note,
+                        });
                     break;
 
                 case "r":
-                    setCanvasState({
-                        mode: CanvasMode.Inserting,
-                        layerType: LayerType.Rectangle,
-                    });
+                    if (e.ctrlKey)
+                        setCanvasState({
+                            mode: CanvasMode.Inserting,
+                            layerType: LayerType.Rectangle,
+                        });
                     break;
 
                 case "e":
-                    setCanvasState({
-                        mode: CanvasMode.Inserting,
-                        layerType: LayerType.Ellipse,
-                    });
-                    break;
-
-                case "p":
-                    setCanvasState({
-                        mode: CanvasMode.Pencil,
-                    });
+                    if (e.ctrlKey)
+                        setCanvasState({
+                            mode: CanvasMode.Inserting,
+                            layerType: LayerType.Ellipse,
+                        });
                     break;
 
                 default:
@@ -87,12 +84,12 @@ const Toolbar = ({
             document.removeEventListener("keydown", onKeyDown);
         };
     }, [selection, setCanvasState]);
-    
+
     return (
         <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
             <div className="bg-white rounded-md p-1.5 flex gap-1 flex-col items-center shadow-md">
                 <ToolButton
-                    label="Select (A)"
+                    label="Select (Ctrl+A)"
                     icon={MousePointer2}
                     onClick={() => setCanvasState({ mode: CanvasMode.None })}
                     isActive={
@@ -104,7 +101,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Text (T)"
+                    label="Text (Ctrl+T)"
                     icon={TypeIcon}
                     onClick={() =>
                         setCanvasState({
@@ -118,7 +115,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Sticky Notes (S)"
+                    label="Sticky Note (Ctrl+N)"
                     icon={StickyNote}
                     onClick={() =>
                         setCanvasState({
@@ -132,7 +129,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Rectangle (R)"
+                    label="Rectangle (Ctrl+R)"
                     icon={Square}
                     onClick={() =>
                         setCanvasState({
@@ -146,7 +143,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Ellipse (E)"
+                    label="Ellipse (Ctrl+E)"
                     icon={Circle}
                     onClick={() =>
                         setCanvasState({
@@ -160,7 +157,7 @@ const Toolbar = ({
                     }
                 />
                 <ToolButton
-                    label="Pen (P)"
+                    label="Pen"
                     icon={Pencil}
                     onClick={() =>
                         setCanvasState({

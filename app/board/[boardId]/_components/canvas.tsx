@@ -55,7 +55,7 @@ import { Id } from "@/convex/_generated/dataModel";
 
 const MAX_LAYERS = 100;
 const SELECTION_NET_THRESHOLD = 5;
-const MOVE_OFFSET = 30;
+const MOVE_OFFSET = 5;
 
 interface CanvasProps {
     boardId: string;
