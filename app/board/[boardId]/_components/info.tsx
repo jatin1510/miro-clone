@@ -9,13 +9,14 @@ import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { useRenameModal } from "@/store/use-rename-modal";
 import { useQuery } from "convex/react";
-import { Menu } from "lucide-react";
+import { ImageDown, Menu } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 
 interface InfoProps {
     boardId: string;
+    exportAsPng?: () => void;
 }
 
 const font = Poppins({
@@ -24,10 +25,10 @@ const font = Poppins({
 });
 
 const TabSeparator = () => {
-    return <div className="text-neutral-300 px-1.5">|</div>;
+    return <div className="text-neutral-300 px-1.5 pointer-events-none">|</div>;
 };
 
-const Info = ({ boardId }: InfoProps) => {
+const Info = ({ boardId, exportAsPng }: InfoProps) => {
     const { onOpen } = useRenameModal();
     const data = useQuery(api.board.get, { id: boardId as Id<"boards"> });
 
@@ -63,6 +64,12 @@ const Info = ({ boardId }: InfoProps) => {
                     onClick={() => onOpen(data._id, data.title)}
                 >
                     {data.title}
+                </Button>
+            </Hint>
+            <TabSeparator />
+            <Hint label="Export as PNG" side="bottom" sideOffset={10}>
+                <Button size="icon" variant="board" onClick={exportAsPng}>
+                    <ImageDown />
                 </Button>
             </Hint>
             <TabSeparator />

@@ -96,6 +96,9 @@ Make sure you have the following installed on your system:
 - **Color Picker**:
   - User now has infinite possible combinations of the layer they want. Color picker also has the debouncing technique to prevent the numerous undo/redo actions
 
+- **Export as a PNG**:
+  - Users can now export their board as a PNG image file. This functionality allows users to save their work and share it with others easily.
+
 - **Bug Fixes**:
   - **Search and Favorite Functionality**: Fixed the search and favorite functionality by using `useSearchParams`.
 
